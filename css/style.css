@@ -51,7 +51,7 @@ body {
   color: var(--text);
   overflow-x: hidden;
   transition: background 0.4s ease, color 0.4s ease;
-  cursor: none;
+  cursor: default;
 }
 
 /* ---------- Scrollbar ---------- */
@@ -69,7 +69,6 @@ body {
   pointer-events: none;
   transform: translate(-50%, -50%);
   z-index: 9999;
-  mix-blend-mode: difference;
   transition: width 0.2s, height 0.2s;
 }
 
@@ -140,7 +139,8 @@ body {
   color: var(--accent);
   padding: 8px 14px;
   border-radius: 4px;
-  cursor: none;
+  cursor: pointer;
+  pointer-events: all;
   font-family: 'Share Tech Mono', monospace;
   font-size: 12px;
   letter-spacing: 1px;
@@ -255,7 +255,8 @@ body {
   border: 1px solid var(--accent);
   background: transparent;
   color: var(--accent);
-  cursor: none;
+  cursor: pointer;
+  pointer-events: all;
   font-family: 'Share Tech Mono', monospace;
   font-size: 13px;
   letter-spacing: 2px;
@@ -342,6 +343,7 @@ body {
   background: radial-gradient(circle at 50% 0%, rgba(47, 255, 208, 0.08), transparent 60%);
   opacity: 0;
   transition: opacity 0.3s;
+  pointer-events: none;  
 }
 
 .member-card:hover {
@@ -405,7 +407,8 @@ body {
   font-size: 11px;
   letter-spacing: 1px;
   border-radius: 4px;
-  cursor: none;
+  cursor: pointer;
+  pointer-events: all;
   transition: all 0.2s ease;
 }
 
@@ -801,7 +804,8 @@ footer {
   border-radius: 4px;
   text-decoration: none;
   transition: all 0.2s ease;
-  cursor: none;
+  cursor: pointer;
+  pointer-events: all;
 }
 
 .social-link:hover {
@@ -823,7 +827,8 @@ footer {
   text-decoration: none;
   white-space: nowrap;
   transition: all 0.2s ease;
-  cursor: none;
+  cursor: pointer;
+  pointer-events: all;
   position: relative;
   overflow: hidden;
 }
