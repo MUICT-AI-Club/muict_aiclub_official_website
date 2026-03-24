@@ -25,10 +25,10 @@ const members = [
     name: 'WINNY SIPPAKORN',
     role: 'President',
     bio: 'ICT 21',
-    photo: '',
+    photo: 'assets/winny.jpg',
     status: 'current',
-    linkedin: '',
-    github: '',
+    linkedin: 'https://www.linkedin.com/in/sippakorn-kanin-867984263/',
+    github: 'https://github.com/Winnywiz',
     gradYear: null,
   },
   {
@@ -44,7 +44,7 @@ const members = [
   },
   {
     id: 3,
-    name: 'Jasmine rice KANYANAT',
+    name: 'KAOHOM KANYANAT',
     role: 'Graphic Designer',
     bio: 'ICT 21',
     photo: null,
