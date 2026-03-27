@@ -4,7 +4,22 @@
 
 /* ---------- CSS Variables / Themes ---------- */
 :root {
-  --bg: #0f172a;
+   --bg: #f0f9ff;
+  --bg2: #e0f2fe;
+  --surface: rgba(0, 0, 0, 0.03);
+  --surface2: rgba(0, 0, 0, 0.06);
+  --accent: #0f1d62;
+  --accent2: #ed3a3a;
+  --text: #0f172a;
+  --text-muted: #475569;
+  --border: rgba(8, 145, 178, 0.3);
+  --card-bg: rgba(255, 255, 255, 0.7);
+  --shadow: 0 0 30px rgba(8, 145, 178, 0.15);
+  --nav-bg: rgba(240, 249, 255, 0.9);
+}
+
+[data-theme="light"] {
+ --bg: #0f172a;
   --bg2: #1e293b;
   --surface: rgba(255, 255, 255, 0.05);
   --surface2: rgba(255, 255, 255, 0.08);
@@ -17,21 +32,6 @@
   --shadow: 0 0 30px rgba(47, 255, 208, 0.15);
   --nav-bg: rgba(15, 23, 42, 0.85);
   --radius: 12px;
-}
-
-[data-theme="light"] {
-  --bg: #f0f9ff;
-  --bg2: #e0f2fe;
-  --surface: rgba(0, 0, 0, 0.03);
-  --surface2: rgba(0, 0, 0, 0.06);
-  --accent: #0891b2;
-  --accent2: #7c3aed;
-  --text: #0f172a;
-  --text-muted: #475569;
-  --border: rgba(8, 145, 178, 0.3);
-  --card-bg: rgba(255, 255, 255, 0.7);
-  --shadow: 0 0 30px rgba(8, 145, 178, 0.15);
-  --nav-bg: rgba(240, 249, 255, 0.9);
 }
 
 /* ---------- Reset ---------- */

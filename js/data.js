@@ -36,7 +36,7 @@ const members = [
     name: 'ANT NOPWAREE',
     role: 'Vice President',
     bio: 'ICT 21',
-    photo: null,
+    photo: 'assets/ant.jpg',
     status: 'current',
     linkedin: '',
     github: '',

@@ -37,8 +37,47 @@
       <h1>MUICT AI CLUB</h1>
       <p class="hero-sub">BUILDING INTELLIGENT SYSTEMS FOR THE FUTURE</p>
       <div class="hero-btns">
-        <button class="btn filled" onclick="showPage('members', document.querySelector('[data-page=members]'))">JOIN US</button>
-        <button class="btn" onclick="showPage('projects', document.querySelector('[data-page=projects]'))">VIEW PROJECTS</button>
+        <!-- <button class="btn filled" onclick="showPage('members', document.querySelector('[data-page=members]'))">JOIN US</button>
+        <a href="hackathon.html" class="btn">HACKATHON</a> -->
+        <button 
+  class="btn filled" 
+  onclick="showPage('members', document.querySelector('[data-page=members]'))"
+  style="color: white;"
+>
+  JOIN US
+</button>
+
+<a 
+  href="hackathon.html"
+  style="
+    display:inline-block;
+    width:auto;
+    white-space:nowrap;
+    padding:12px 28px;
+    color:#C8102E;
+    border:2px solid #C8102E;
+    font-weight:700;
+    text-decoration:none;
+    letter-spacing:2px;
+    background:transparent;
+    transition:all 0.25s ease;
+  "
+  onmouseover="
+    this.style.background='#C8102E';
+    this.style.color='white';
+    this.style.boxShadow='0 6px 20px rgba(200,16,46,0.3)';
+    this.style.transform='translateY(-2px)';
+  "
+  onmouseout="
+    this.style.background='transparent';
+    this.style.color='#C8102E';
+    this.style.boxShadow='none';
+    this.style.transform='translateY(0)';
+  "
+>
+  HACKATHON
+</a>
+ 
       </div>
       <div class="hero-stats">
         <div class="stat"><span class="stat-num" id="statMembers">0</span><div class="stat-label">MEMBERS</div></div>
@@ -82,7 +121,7 @@
           <div class="join-banner-title">WANT TO JOIN?</div>
           <div class="join-banner-sub">Fill in the form and we will get back to you.</div>
         </div>
-        <a id="joinFormLink" href="#" target="_blank" rel="noopener" class="btn filled">APPLY NOW</a>
+        <a id="joinFormLink" href="#" target="_blank" rel="noopener" class="btn filled" style="color: white;">APPLY NOW</a>
       </div>
 
     </div>
