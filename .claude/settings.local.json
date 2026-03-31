@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /Users/winwinnys/Documents/Mahidol/muict_aiclub_official_website -not -path */.* -type f)",
+      "WebFetch(domain:www.ict.mahidol.ac.th)"
+    ],
+    "additionalDirectories": [
+      "/Users/winwinnys/Documents/Mahidol/muict_aiclub_official_website"
+    ]
+  }
+}

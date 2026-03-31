@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACSE Hackathon 2026 · MUICT AI Club</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --red:    #C8102E;
+      --navy:   #0A1628;
+      --navy2:  #0D1F3C;
+      --white:  #FFFFFF;
+      --off:    #F4F5F7;
+      --gray:   #8892A4;
+      --line:   rgba(10,22,40,0.12);
+      --accent: #E8F0FF;
+      --ecg:    #C8102E;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--navy);
+      overflow-x: hidden;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 40px; height: 60px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-logo {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 2px;
+      color: var(--navy);
+    }
+    .nav-logo span { color: var(--red); }
+    .nav-links {
+      display: flex; align-items: center; gap: 32px;
+    }
+    .nav-link {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: var(--gray);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-link:hover { color: var(--red); }
+    .nav-back {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: var(--gray);
+      text-decoration: none; transition: color .2s;
+    }
+    .nav-back:hover { color: var(--red); }
+    @media(max-width:600px){
+      nav { padding: 0 20px; }
+      .nav-links { gap: 16px; }
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background: var(--navy);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 100px 40px 60px;
+      overflow: hidden;
+    }
+
+    /* Animated ECG line across hero */
+    .ecg-line-wrap {
+      position: absolute; bottom: 80px; left: 0; right: 0;
+      height: 80px; overflow: hidden; opacity: 0.35;
+    }
+    .ecg-line-wrap svg {
+      width: 200%; animation: scrollECG 6s linear infinite;
+    }
+    @keyframes scrollECG {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Red glow orb */
+    .hero::before {
+      content: '';
+      position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(200,16,46,0.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-tag {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 4px; color: var(--red);
+      border: 1px solid rgba(200,16,46,0.4);
+      padding: 6px 18px; border-radius: 2px; margin-bottom: 28px;
+      animation: fadeUp .6s ease both;
+    }
+
+    .hero h1 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(28px, 6vw, 72px);
+      font-weight: 900; color: var(--white);
+      line-height: 1.1; letter-spacing: -1px;
+      animation: fadeUp .7s .1s ease both;
+    }
+    .hero h1 span { color: var(--red); }
+
+    .hero-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: clamp(11px, 1.5vw, 14px);
+      letter-spacing: 3px; color: var(--gray);
+      margin-top: 18px;
+      animation: fadeUp .7s .2s ease both;
+    }
+
+    .hero-badges {
+      display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+      margin-top: 36px;
+      animation: fadeUp .7s .3s ease both;
+    }
+    .badge {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px;
+      padding: 8px 20px; border-radius: 2px;
+    }
+    .badge-red  { background: var(--red); color: var(--white); }
+    .badge-out  { border: 1px solid rgba(255,255,255,0.25); color: var(--white); }
+
+    .hero-cta {
+      margin-top: 44px;
+      animation: fadeUp .7s .4s ease both;
+    }
+    .btn-register {
+      font-family: 'Orbitron', monospace;
+      font-size: 15px; font-weight: 700; letter-spacing: 4px;
+      padding: 22px 60px; background: var(--red); color: var(--white);
+      border: none; border-radius: 2px; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 0 40px rgba(200,16,46,0.65), 0 0 80px rgba(200,16,46,0.25);
+      transition: transform .2s, box-shadow .2s, letter-spacing .2s;
+      position: relative;
+    }
+    .btn-register::after {
+      content: '';
+      position: absolute; inset: -3px; border-radius: 4px;
+      border: 1px solid rgba(200,16,46,0.5);
+      animation: borderPulse 2s ease infinite;
+    }
+    @keyframes borderPulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: 0; transform: scale(1.04); }
+    }
+    .btn-register:hover {
+      transform: translateY(-3px);
+      letter-spacing: 5px;
+      box-shadow: 0 0 60px rgba(200,16,46,0.8), 0 0 120px rgba(200,16,46,0.35);
+    }
+
+    /* pulse dot */
+    .pulse-wrap {
+      display: flex; align-items: center; gap: 8px; margin-top: 20px;
+      font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--gray);
+      letter-spacing: 2px; justify-content: center;
+    }
+    .pulse-dot {
+      width: 8px; height: 8px; border-radius: 50%; background: #22C55E;
+      animation: pulse 1.4s ease infinite;
+    }
+    @keyframes pulse {
+      0%,100% { opacity: 1; transform: scale(1); }
+      50%      { opacity: .4; transform: scale(1.6); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── STICKY REGISTER BAR ── */
+    .sticky-bar {
+      position: fixed; bottom: 0; left: 0; right: 0; z-index: 99;
+      background: var(--navy2);
+      border-top: 2px solid var(--red);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 40px;
+      transform: translateY(100%);
+      transition: transform .4s cubic-bezier(.22,1,.36,1);
+      box-shadow: 0 -8px 40px rgba(0,0,0,0.4);
+    }
+    .sticky-bar.visible { transform: translateY(0); }
+    .sticky-bar-left {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .sticky-pulse { width: 10px; height: 10px; border-radius: 50%; background: #22C55E; animation: pulse 1.4s ease infinite; flex-shrink: 0; }
+    .sticky-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; color: var(--white); letter-spacing: 2px;
+    }
+    .sticky-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; color: var(--gray); letter-spacing: 2px; margin-top: 2px;
+    }
+    .btn-sticky {
+      font-family: 'Orbitron', monospace;
+      font-size: 12px; font-weight: 700; letter-spacing: 3px;
+      padding: 12px 32px; background: var(--red); color: var(--white);
+      border: none; border-radius: 2px; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 0 20px rgba(200,16,46,0.5);
+      transition: transform .2s, box-shadow .2s;
+      white-space: nowrap;
+    }
+    .btn-sticky:hover { transform: translateY(-1px); box-shadow: 0 0 35px rgba(200,16,46,0.7); }
+    @media(max-width:600px){
+      .sticky-bar { padding: 12px 20px; }
+      .sticky-sub { display: none; }
+    }
+
+    /* ── CONTENT SECTIONS ── */
+    .content { background: var(--white); }
+
+    .section {
+      max-width: 1100px; margin: 0 auto;
+      padding: 80px 40px;
+    }
+
+    .sec-eyebrow {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 4px; color: var(--red);
+      margin-bottom: 12px;
+    }
+    .sec-heading {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(20px, 3vw, 32px); font-weight: 700;
+      color: var(--navy); margin-bottom: 32px;
+    }
+    .sec-body {
+      font-size: 16px; line-height: 1.8; color: #334155;
+      max-width: 720px;
+    }
+
+    /* ── DIVIDER ── */
+    .hr { height: 1px; background: var(--line); }
+
+    /* ── ABOUT + ECG ILLUSTRATION ── */
+    .about-wrap {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+    }
+    @media(max-width:720px){ .about-wrap { grid-template-columns: 1fr; } }
+
+    .ecg-card {
+      background: var(--navy);
+      border-radius: 4px;
+      padding: 40px 30px;
+      position: relative; overflow: hidden;
+    }
+    .ecg-card-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; color: var(--gray);
+      margin-bottom: 16px;
+    }
+    .ecg-card svg { width: 100%; display: block; }
+    .ecg-card-reading {
+      display: flex; justify-content: space-between; margin-top: 20px;
+    }
+    .ecg-reading-item { text-align: center; }
+    .ecg-reading-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 22px; font-weight: 700; color: var(--red);
+    }
+    .ecg-reading-lbl {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 9px; letter-spacing: 2px; color: var(--gray);
+      margin-top: 4px;
+    }
+    .ecg-scan-line {
+      position: absolute; top: 0; left: -100%; width: 60px; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(200,16,46,0.15), transparent);
+      animation: scan 3s ease-in-out infinite;
+    }
+    @keyframes scan {
+      from { left: -100%; }
+      to   { left: 200%; }
+    }
+
+    /* ── TIMELINE ── */
+    .timeline { position: relative; padding-left: 40px; }
+    .timeline::before {
+      content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+      width: 2px; background: var(--line);
+    }
+    .tl-item { position: relative; margin-bottom: 40px; }
+    .tl-item:last-child { margin-bottom: 0; }
+    .tl-dot {
+      position: absolute; left: -36px; top: 4px;
+      width: 16px; height: 16px; border-radius: 50%;
+      background: var(--white); border: 3px solid var(--navy);
+    }
+    .tl-item.red .tl-dot { border-color: var(--red); background: var(--red); }
+    .tl-date {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: var(--red);
+      margin-bottom: 6px;
+    }
+    .tl-title {
+      font-family: 'Orbitron', monospace;
+      font-size: 15px; font-weight: 700; color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .tl-loc {
+      font-size: 13px; color: var(--gray);
+    }
+
+    /* ── OBJECTIVES ── */
+    .obj-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px; margin-top: 8px;
+    }
+    .obj-card {
+      border: 1px solid var(--line);
+      border-radius: 4px; padding: 28px 24px;
+      transition: border-color .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .obj-card::before {
+      content: ''; position: absolute; top: 0; left: 0;
+      width: 3px; height: 0; background: var(--red);
+      transition: height .3s;
+    }
+    .obj-card:hover { border-color: rgba(200,16,46,0.3); transform: translateY(-3px); }
+    .obj-card:hover::before { height: 100%; }
+    .obj-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 32px; font-weight: 900; color: var(--red);
+      line-height: 1; margin-bottom: 12px;
+    }
+    .obj-text { font-size: 14px; line-height: 1.7; color: #475569; }
+
+    /* ── INFO STRIP ── */
+    .info-strip {
+      background: var(--navy);
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+    .info-item {
+      padding: 40px 36px;
+      border-right: 1px solid rgba(255,255,255,0.07);
+    }
+    .info-item:last-child { border-right: none; }
+    .info-icon {
+      font-size: 22px; margin-bottom: 12px;
+    }
+    .info-label {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 10px; letter-spacing: 3px; color: var(--gray);
+      margin-bottom: 6px;
+    }
+    .info-val {
+      font-family: 'Orbitron', monospace;
+      font-size: 15px; font-weight: 700; color: var(--white);
+    }
+    .info-sub { font-size: 12px; color: var(--gray); margin-top: 4px; }
+
+    /* ── PRIZES ── */
+    .prizes-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 24px; margin-top: 8px;
+    }
+    .prize-card {
+      border: 1px solid var(--line);
+      border-radius: 4px; padding: 32px 24px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+      position: relative; overflow: hidden;
+    }
+    .prize-card.gold   { border-color: rgba(212,175,55,0.4); }
+    .prize-card.silver { border-color: rgba(168,168,168,0.4); }
+    .prize-card.bronze { border-color: rgba(176,101,56,0.4); }
+    .prize-card:hover  { transform: translateY(-4px); }
+    .prize-card.gold:hover   { border-color: rgba(212,175,55,0.8); box-shadow: 0 8px 30px rgba(212,175,55,0.1); }
+    .prize-card.silver:hover { border-color: rgba(168,168,168,0.8); box-shadow: 0 8px 30px rgba(168,168,168,0.1); }
+    .prize-card.bronze:hover { border-color: rgba(176,101,56,0.8); box-shadow: 0 8px 30px rgba(176,101,56,0.1); }
+    .prize-medal {
+      font-size: 44px; margin-bottom: 16px; line-height: 1;
+    }
+    .prize-place {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      margin-bottom: 12px;
+    }
+    .prize-card.gold   .prize-place { color: #D4AF37; }
+    .prize-card.silver .prize-place { color: #A8A8A8; }
+    .prize-card.bronze .prize-place { color: #B06538; }
+    .prize-amount {
+      font-family: 'Orbitron', monospace;
+      font-size: 28px; font-weight: 900; color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .prize-tba {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 12px; letter-spacing: 3px;
+      color: var(--gray);
+      border: 1px dashed rgba(10,22,40,0.2);
+      display: inline-block; padding: 4px 14px; border-radius: 2px;
+    }
+    .prize-desc { font-size: 13px; color: var(--gray); margin-top: 10px; line-height: 1.6; }
+    .prize-note {
+      margin-top: 28px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: var(--gray);
+      text-align: center; display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .prize-note-dot {
+      width: 6px; height: 6px; border-radius: 50%; background: #F59E0B;
+      animation: pulse 2s ease infinite; flex-shrink: 0;
+    }
+
+    /* ── FAQ ── */
+    .faq-list { margin-top: 8px; }
+    .faq-item {
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .faq-item.open { border-color: rgba(200,16,46,0.3); }
+    .faq-q {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 20px 24px;
+      cursor: pointer;
+      user-select: none;
+      gap: 16px;
+    }
+    .faq-q-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px; font-weight: 500; color: var(--navy);
+      line-height: 1.4;
+    }
+    .faq-icon {
+      font-family: 'Orbitron', monospace;
+      font-size: 18px; font-weight: 700; color: var(--red);
+      flex-shrink: 0; transition: transform .25s;
+      line-height: 1;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-a {
+      max-height: 0; overflow: hidden;
+      transition: max-height .35s cubic-bezier(.4,0,.2,1), padding .25s;
+      padding: 0 24px;
+      font-size: 14px; line-height: 1.8; color: #475569;
+    }
+    .faq-item.open .faq-a {
+      max-height: 400px;
+      padding: 0 24px 20px;
+    }
+
+    /* ── REGISTER CTA ── */
+    .cta-section {
+      background: var(--red);
+      padding: 80px 40px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .cta-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.04) 60px,
+        rgba(255,255,255,0.04) 61px
+      );
+    }
+    .cta-ecg {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 60px; overflow: hidden; opacity: 0.2;
+    }
+    .cta-ecg svg { width: 200%; animation: scrollECG 5s linear infinite; }
+    .cta-section h2 {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(22px, 4vw, 42px); font-weight: 900;
+      color: var(--white); margin-bottom: 16px;
+      position: relative; z-index: 1;
+    }
+    .cta-section p {
+      font-size: 15px; color: rgba(255,255,255,0.75);
+      margin-bottom: 36px; position: relative; z-index: 1;
+    }
+    .btn-register-white {
+      font-family: 'Orbitron', monospace;
+      font-size: 13px; font-weight: 700; letter-spacing: 3px;
+      padding: 16px 48px; background: var(--white); color: var(--red);
+      border: none; border-radius: 2px; cursor: pointer;
+      text-decoration: none; display: inline-block;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+      transition: transform .2s, box-shadow .2s;
+      position: relative; z-index: 1;
+    }
+    .btn-register-white:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 40px rgba(0,0,0,0.3);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--navy2);
+      text-align: center; padding: 28px 40px;
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 11px; letter-spacing: 2px; color: var(--gray);
+    }
+    footer a { color: var(--red); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav>
+    <div class="nav-logo">MUICT <span>AI</span> CLUB</div>
+    <div class="nav-links">
+      <a href="#about"    class="nav-link">ABOUT</a>
+      <a href="#schedule" class="nav-link">SCHEDULE</a>
+      <a href="#prizes"   class="nav-link">PRIZES</a>
+      <a href="#faq"      class="nav-link">FAQ</a>
+      <a href="../index.html" class="nav-back">← BACK TO HOME</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <canvas id="stars" style="position:absolute;inset:0;pointer-events:none;z-index:0;"></canvas>
+
+    <div class="hero-tag" style="position:relative;z-index:1;">MUICT HACKATHON 2026</div>
+
+    <h1 style="position:relative;z-index:1;">
+      ARTERY CALCIUM<br><span>SCORING</span><br>VIA ECG
+    </h1>
+    <div class="hero-sub" style="position:relative;z-index:1;">ACSE HACKATHON 2026 · MUICT AI CLUB</div>
+
+    <div class="hero-badges" style="position:relative;z-index:1;">
+      <span class="badge badge-red">AI · DEEP LEARNING</span>
+      <span class="badge badge-out">MEDICAL DATA SCIENCE</span>
+      <span class="badge badge-out">10 APR — 18 APR 2026</span>
+    </div>
+
+    <div class="hero-cta" style="position:relative;z-index:1;">
+      <a href="#register" class="btn-register">REGISTER NOW</a>
+      <div class="pulse-wrap">
+        <div class="pulse-dot"></div>
+        <span>REGISTRATION OPEN</span>
+      </div>
+    </div>
+
+    <!-- Animated ECG line -->
+    <div class="ecg-line-wrap">
+      <svg viewBox="0 0 1400 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline
+          points="0,40 60,40 80,40 90,10 100,70 110,40 130,40
+                  200,40 220,40 230,10 240,70 250,40 270,40
+                  340,40 360,40 370,10 380,70 390,40 410,40
+                  480,40 500,40 510,10 520,70 530,40 550,40
+                  620,40 640,40 650,10 660,70 670,40 690,40
+                  760,40 780,40 790,10 800,70 810,40 830,40
+                  900,40 920,40 930,10 940,70 950,40 970,40
+                  1040,40 1060,40 1070,10 1080,70 1090,40 1110,40
+                  1180,40 1200,40 1210,10 1220,70 1230,40 1250,40
+                  1320,40 1340,40 1350,10 1360,70 1370,40 1400,40"
+          fill="none" stroke="#C8102E" stroke-width="2"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- MAIN CONTENT -->
+  <div class="content">
+
+    <!-- ABOUT -->
+    <div class="section" id="about">
+      <div class="about-wrap">
+        <div>
+          <div class="sec-eyebrow">BACKGROUND</div>
+          <div class="sec-heading">WHY THIS HACKATHON?</div>
+          <div class="sec-body">
+            <p>The application of AI and Data Science in the medical field plays a crucial role, especially in analyzing data to help predict the risk of heart disease.</p>
+            <br>
+            <p>This project provides students with the opportunity to apply Deep Learning techniques to ECG data in order to predict the <strong>Coronary Artery Calcium Score</strong> — an important indicator of coronary artery blockage.</p>
+          </div>
+        </div>
+
+        <!-- ECG Monitor Card -->
+        <div class="ecg-card">
+          <div class="ecg-scan-line"></div>
+          <div class="ecg-card-label">// LEAD II · REAL-TIME SIMULATION</div>
+          <svg viewBox="0 0 320 100" xmlns="http://www.w3.org/2000/svg">
+            <polyline
+              points="0,50 20,50 30,50 38,20 44,80 50,50 70,50
+                      90,50 100,50 108,20 114,80 120,50 140,50
+                      160,50 170,50 178,20 184,80 190,50 210,50
+                      230,50 240,50 248,20 254,80 260,50 280,50 320,50"
+              fill="none" stroke="#C8102E" stroke-width="1.8"
+              stroke-linejoin="round"/>
+            <polyline points="12,50 18,44 24,50" fill="none" stroke="rgba(200,16,46,0.5)" stroke-width="1"/>
+            <polyline points="82,50 88,44 94,50" fill="none" stroke="rgba(200,16,46,0.5)" stroke-width="1"/>
+            <polyline points="56,50 63,38 70,50" fill="none" stroke="rgba(200,16,46,0.6)" stroke-width="1"/>
+            <polyline points="126,50 133,38 140,50" fill="none" stroke="rgba(200,16,46,0.6)" stroke-width="1"/>
+            <line x1="0" y1="25" x2="320" y2="25" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+            <line x1="0" y1="50" x2="320" y2="50" stroke="rgba(255,255,255,0.08)" stroke-width="1"/>
+            <line x1="0" y1="75" x2="320" y2="75" stroke="rgba(255,255,255,0.05)" stroke-width="1"/>
+          </svg>
+          <div class="ecg-card-reading">
+            <div class="ecg-reading-item">
+              <div class="ecg-reading-val" id="hrVal">72</div>
+              <div class="ecg-reading-lbl">HR bpm</div>
+            </div>
+            <div class="ecg-reading-item">
+              <div class="ecg-reading-val" id="cacVal">--</div>
+              <div class="ecg-reading-lbl">CAC SCORE</div>
+            </div>
+            <div class="ecg-reading-item">
+              <div class="ecg-reading-val">ECG</div>
+              <div class="ecg-reading-lbl">INPUT</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- INFO STRIP -->
+    <div class="info-strip">
+      <div class="info-item">
+        <div class="info-icon">📅</div>
+        <div class="info-label">WORKSHOP & KICKOFF</div>
+        <div class="info-val">APR 10, 2026</div>
+        <div class="info-sub">Room IT204, MUICT</div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">💻</div>
+        <div class="info-label">HACKATHON</div>
+        <div class="info-val">APR 17–18, 2026</div>
+        <div class="info-sub">Bit &amp; Byte Room, MUICT</div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">👥</div>
+        <div class="info-label">TEAM SIZE</div>
+        <div class="info-val">2–4 PEOPLE</div>
+        <div class="info-sub">Cross-year teams welcome</div>
+      </div>
+      <div class="info-item">
+        <div class="info-icon">🎯</div>
+        <div class="info-label">TARGET</div>
+        <div class="info-val">MUICT STUDENTS</div>
+        <div class="info-sub">All years · All tracks</div>
+      </div>
+    </div>
+
+    <!-- OBJECTIVES -->
+    <div class="section">
+      <div class="sec-eyebrow">WHAT YOU'LL GAIN</div>
+      <div class="sec-heading">OBJECTIVES</div>
+      <div class="obj-grid">
+        <div class="obj-card">
+          <div class="obj-num">01</div>
+          <div class="obj-text">Gain real experience by participating in a university-level <strong>Hackathon</strong></div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-num">02</div>
+          <div class="obj-text">Apply <strong>AI &amp; Data Science</strong> to real-world medical problems (Coronary Artery Disease prediction)</div>
+        </div>
+        <div class="obj-card">
+          <div class="obj-num">03</div>
+          <div class="obj-text">Develop skills in <strong>programming, Deep Learning</strong> as well as Soft Skills: communication, teamwork, and time management</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- SCHEDULE TIMELINE -->
+    <div class="section" id="schedule">
+      <div class="sec-eyebrow">SCHEDULE</div>
+      <div class="sec-heading">TIMELINE</div>
+      <div class="timeline">
+        <div class="tl-item red">
+          <div class="tl-dot"></div>
+          <div class="tl-date">10 APRIL 2026</div>
+          <div class="tl-title">WORKSHOP &amp; KICKOFF</div>
+          <div class="tl-loc">Room IT204 · Faculty of ICT, Mahidol University<br>Introduction to ECG + Deep Learning + competition briefing</div>
+        </div>
+        <div class="tl-item red">
+          <div class="tl-dot"></div>
+          <div class="tl-date">10 – 16 APRIL 2026</div>
+          <div class="tl-title">DEVELOPMENT PHASE</div>
+          <div class="tl-loc">Teams develop AI models for Artery Calcium Scoring</div>
+        </div>
+        <div class="tl-item red">
+          <div class="tl-dot"></div>
+          <div class="tl-date">17 – 18 APRIL 2026</div>
+          <div class="tl-title">HACKATHON &amp; PRESENTATION</div>
+          <div class="tl-loc">Meeting Room Bit &amp; Byte · Faculty of ICT, Mahidol University<br>Develop, finalize, and present projects to judges</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- PRIZES -->
+    <div class="section" id="prizes">
+      <div class="sec-eyebrow">REWARDS</div>
+      <div class="sec-heading">PRIZES</div>
+      <div class="prizes-grid">
+        <div class="prize-card gold">
+          <div class="prize-medal">🥇</div>
+          <div class="prize-place">1ST PLACE</div>
+          <div class="prize-amount"><span class="prize-tba">TBA</span></div>
+          <div class="prize-desc">Winner's prize + certificate + special recognition</div>
+        </div>
+        <div class="prize-card silver">
+          <div class="prize-medal">🥈</div>
+          <div class="prize-place">2ND PLACE</div>
+          <div class="prize-amount"><span class="prize-tba">TBA</span></div>
+          <div class="prize-desc">Runner-up prize + certificate</div>
+        </div>
+        <div class="prize-card bronze">
+          <div class="prize-medal">🥉</div>
+          <div class="prize-place">3RD PLACE</div>
+          <div class="prize-amount"><span class="prize-tba">TBA</span></div>
+          <div class="prize-desc">3rd place prize + certificate</div>
+        </div>
+      </div>
+      <div class="prize-note">
+        <div class="prize-note-dot"></div>
+        PRIZE DETAILS WILL BE ANNOUNCED SOON — STAY TUNED
+      </div>
+    </div>
+
+    <div class="hr"></div>
+
+    <!-- FAQ -->
+    <div class="section" id="faq">
+      <div class="sec-eyebrow">QUESTIONS & ANSWERS</div>
+      <div class="sec-heading">FAQ</div>
+      <div class="faq-list">
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Who can participate in the ACSE Hackathon 2026?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            All currently enrolled students at the Faculty of ICT, Mahidol University are eligible to join — regardless of year (1st–4th) or track. No prior hackathon experience required!
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What is the team size?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Teams consist of 2–4 members. Cross-year teams are strongly encouraged. Solo registration is also allowed, and we can help match you with other participants if needed.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What data and tools will be provided?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            The dataset (ECG signals with CAC labels) will be provided at the Kickoff on April 10. You can use any open-source tools, libraries, or frameworks — Python, TensorFlow, PyTorch, scikit-learn, etc. Compute resources information will be shared during the kickoff briefing.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Do I need prior AI or Deep Learning experience?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Not required! We will run a workshop on April 10 covering ECG basics and Deep Learning fundamentals. Beginners are very welcome. However, some familiarity with Python will be helpful.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">How will teams be judged?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Judging criteria include: (1) Model performance (accuracy/metric score on the test set), (2) Code quality and approach, (3) Presentation clarity and understanding, (4) Innovation in methodology. Full rubric will be provided at kickoff.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">What should I bring on hackathon day (Apr 17–18)?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Bring your laptop, charger, and any notes or code you've prepared during the development phase. Food and drinks will be provided. Presentation slides (or notebook) should be ready before the judging session starts.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Can I start coding before the hackathon day?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            Yes — the development phase runs April 10–16 after the kickoff. Teams are expected to explore the dataset and build initial models during this period. The hackathon days (Apr 17–18) are for finalizing, improving, and presenting your work.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q" onclick="toggleFaq(this)">
+            <span class="faq-q-text">Is there a registration fee?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-a">
+            No registration fee. The ACSE Hackathon 2026 is completely free for all MUICT students.
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- REGISTER CTA -->
+  <section class="cta-section" id="register">
+    <div class="cta-ecg">
+      <svg viewBox="0 0 1400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline
+          points="0,30 60,30 80,30 90,5 100,55 110,30 130,30
+                  200,30 220,30 230,5 240,55 250,30 270,30
+                  340,30 360,30 370,5 380,55 390,30 410,30
+                  480,30 500,30 510,5 520,55 530,30 550,30
+                  620,30 640,30 650,5 660,55 670,30 690,30
+                  760,30 780,30 790,5 800,55 810,30 830,30
+                  900,30 920,30 930,5 940,55 950,30 970,30
+                  1040,30 1060,30 1070,5 1080,55 1090,30 1110,30
+                  1180,30 1200,30 1210,5 1220,55 1230,30 1250,30
+                  1320,30 1340,30 1350,5 1360,55 1370,30 1400,30"
+          fill="none" stroke="white" stroke-width="1.5"/>
+      </svg>
+    </div>
+    <h2>READY TO BUILD THE FUTURE<br>OF CARDIAC AI?</h2>
+    <p>Sign up to join the ACSE Hackathon 2026 and conquer medical challenges with AI</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckFCOGhktF6cluzre4H6ZwYczFdFin9ZBVX8mJkWtWTEcyYA/viewform?usp=header" target="_blank" rel="noopener" class="btn-register-white">REGISTER NOW</a>
+  </section>
+
+  <!-- STICKY REGISTER BAR -->
+  <div class="sticky-bar" id="stickyBar">
+    <div class="sticky-bar-left">
+      <div class="sticky-pulse"></div>
+      <div>
+        <div class="sticky-title">ACSE HACKATHON 2026</div>
+        <div class="sticky-sub">APR 10 · 17–18 · MUICT</div>
+      </div>
+    </div>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSckFCOGhktF6cluzre4H6ZwYczFdFin9ZBVX8mJkWtWTEcyYA/viewform?usp=header" target="_blank" rel="noopener" class="btn-sticky">REGISTER NOW →</a>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2026 MUICT AI CLUB &nbsp;·&nbsp;
+    <a href="../index.html">MAIN SITE</a> &nbsp;·&nbsp;
+    <a href="https://www.ict.mahidol.ac.th/muaihackathon2024/" target="_blank">HACKATHON ARCHIVE 2024</a>
+    &nbsp;·&nbsp; BUILT WITH INTELLIGENCE
+  </footer>
+
+  <script>
+    // Sticky bar
+    const stickyBar = document.getElementById('stickyBar');
+    window.addEventListener('scroll', () => {
+      stickyBar.classList.toggle('visible', window.scrollY > window.innerHeight * 0.6);
+    });
+
+    // Starfield canvas
+    const canvas = document.getElementById('stars');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = canvas.offsetWidth; canvas.height = canvas.offsetHeight; }
+    resize(); window.addEventListener('resize', resize);
+    const stars = Array.from({length: 120}, () => ({
+      x: Math.random(), y: Math.random(),
+      r: Math.random() * 1.2 + 0.2, o: Math.random()
+    }));
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x * canvas.width, s.y * canvas.height, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.o * 0.6})`;
+        ctx.fill();
+        s.o += (Math.random() - 0.5) * 0.02;
+        s.o = Math.max(0.1, Math.min(1, s.o));
+      });
+      requestAnimationFrame(drawStars);
+    }
+    drawStars();
+
+    // Fake live CAC readout
+    const cacEl = document.getElementById('cacVal');
+    const hrEl  = document.getElementById('hrVal');
+    setInterval(() => {
+      hrEl.textContent  = (68 + Math.floor(Math.random() * 10));
+      cacEl.textContent = '···';
+      setTimeout(() => cacEl.textContent = (Math.floor(Math.random() * 400)), 800);
+    }, 3000);
+
+    // FAQ accordion
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
