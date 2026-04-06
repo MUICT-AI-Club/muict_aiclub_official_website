@@ -100,7 +100,8 @@ function buildWorkshopCard(workshop, index) {
 
   const registerBtn = workshop.registerUrl
     ? `<a href="${workshop.registerUrl}" target="_blank" rel="noopener" class="workshop-register-btn">REGISTER</a>`
-    : `<div class="workshop-count">${workshop.attendees}<br><span>ATTENDED</span></div>`;
+    : ``;
+    // : `<div class="workshop-count">${workshop.attendees}<br><span>ATTENDED</span></div>`;
 
   card.innerHTML = `
     <div class="workshop-date">${workshop.date}</div>
