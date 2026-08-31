@@ -73,7 +73,7 @@ const members = [
     status: 'alumni',
     linkedin: '',
     github: '',
-    gradYear: null,
+    gradYear: 2026,
   },
   {
     id: 6,
@@ -84,7 +84,7 @@ const members = [
     status: 'alumni',
     linkedin: '',
     github: '',
-    gradYear: null,
+    gradYear: 2026,
   },
     {
     id: 7,
