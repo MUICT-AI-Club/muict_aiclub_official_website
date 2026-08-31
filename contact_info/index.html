@@ -1,0 +1,524 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MUICT AI Club Contact Info</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+
+<style>
+  /* Dark-committed identity — every color painted explicitly so the page
+     holds on any host ground (light or dark viewer theme). */
+  :root {
+    --ground: #070B1F;
+    --ground-2: #0A1029;
+    --panel: #121936;
+    --panel-hi: #182248;
+    --line: rgba(140, 160, 230, 0.16);
+    --line-hi: rgba(140, 160, 230, 0.34);
+
+    --violet: #8B3DFF;
+    --violet-soft: #A970FF;
+    --blue: #4C7DFF;
+    --blue-soft: #7AA0FF;
+
+    --text: #F2F4FF;
+    --text-dim: #C7D0F5;
+    --text-mute: #8792C4;
+
+    --discord: #5865F2;
+    --insta-a: #F58529;
+    --insta-b: #DD2A7B;
+    --insta-c: #8134AF;
+
+    --maxw: 1080px;
+    --r: 20px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--ground);
+    color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: rgba(139, 61, 255, 0.35); color: #fff; }
+
+  /* ---------- ambient backdrop ---------- */
+  #net {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    display: block;
+  }
+  .glow {
+    position: fixed;
+    z-index: 0;
+    border-radius: 50%;
+    filter: blur(90px);
+    pointer-events: none;
+    opacity: 0.55;
+  }
+  .glow.a { top: -160px; left: -120px; width: 480px; height: 480px;
+    background: radial-gradient(circle, rgba(139,61,255,0.55), transparent 70%); }
+  .glow.b { bottom: -220px; right: -160px; width: 560px; height: 560px;
+    background: radial-gradient(circle, rgba(76,125,255,0.45), transparent 70%); }
+  .grain {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0.5;
+    background:
+      linear-gradient(180deg, rgba(7,11,31,0) 0%, rgba(7,11,31,0.35) 62%, rgba(7,11,31,0.9) 100%);
+  }
+
+  .wrap {
+    position: relative;
+    z-index: 2;
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ---------- hero ---------- */
+  header.hero {
+    position: relative;
+    z-index: 2;
+    padding: clamp(70px, 13vh, 130px) 0 clamp(48px, 8vh, 84px);
+    text-align: center;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 8px 16px;
+    border: 1px solid var(--line-hi);
+    border-radius: 999px;
+    background: rgba(18, 25, 54, 0.55);
+    backdrop-filter: blur(6px);
+  }
+  .eyebrow .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--violet-soft);
+    box-shadow: 0 0 12px 2px rgba(169, 112, 255, 0.9);
+  }
+
+  h1 {
+    font-family: "Sora", sans-serif;
+    font-weight: 800;
+    font-size: clamp(48px, 10vw, 104px);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 26px 0 0;
+    text-wrap: balance;
+    background: linear-gradient(180deg, #FFFFFF 30%, #C9D2FF 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  h1 .ai {
+    background: linear-gradient(120deg, var(--violet-soft), var(--blue-soft));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .lede {
+    max-width: 56ch;
+    margin: 22px auto 0;
+    font-size: clamp(16px, 2.1vw, 19px);
+    color: var(--text-dim);
+    text-wrap: pretty;
+  }
+
+  .subline {
+    margin-top: 30px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--text-mute);
+    display: flex;
+    gap: 10px 22px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .subline span { display: inline-flex; align-items: center; gap: 8px; }
+  .subline span::before {
+    content: ""; width: 5px; height: 5px; border-radius: 50%;
+    background: var(--blue); display: inline-block;
+  }
+
+  /* ---------- section heading ---------- */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin: 8px 0 26px;
+  }
+  .section-head h2 {
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 3vw, 27px);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .section-head .rule {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, var(--line-hi), transparent);
+  }
+  .section-head .tag {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--text-mute);
+  }
+
+  /* ---------- contact cards ---------- */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  @media (max-width: 780px) {
+    .cards { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 18px;
+    min-height: 190px;
+    padding: 34px 24px;
+    border-radius: var(--r);
+    background:
+      linear-gradient(180deg, var(--panel-hi), var(--panel));
+    border: 1px solid var(--line);
+    text-decoration: none;
+    color: var(--text);
+    overflow: hidden;
+    transition: transform 0.28s cubic-bezier(.2,.7,.2,1),
+                border-color 0.28s, box-shadow 0.28s;
+    isolation: isolate;
+  }
+  .card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s;
+    background: radial-gradient(120% 90% at 50% -10%, var(--card-accent, var(--violet)), transparent 60%);
+  }
+  a.card:hover {
+    transform: translateY(-6px);
+    border-color: var(--line-hi);
+    box-shadow: 0 22px 50px -24px rgba(0,0,0,0.8),
+                0 0 0 1px rgba(255,255,255,0.02) inset;
+  }
+  a.card:hover::before { opacity: 0.18; }
+  a.card:focus-visible {
+    outline: 2px solid var(--violet-soft);
+    outline-offset: 3px;
+  }
+
+  .icon {
+    width: 52px; height: 52px;
+    border-radius: 14px;
+    display: grid; place-items: center;
+    background: var(--icon-bg, rgba(255,255,255,0.05));
+    border: 1px solid rgba(255,255,255,0.08);
+    flex: none;
+  }
+  .icon svg { width: 26px; height: 26px; display: block; }
+
+  .card .platform {
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+  .icon { width: 58px; height: 58px; }
+  .icon svg { width: 28px; height: 28px; }
+  .card .handle {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 14px;
+    color: var(--text-dim);
+    word-break: break-word;
+    margin-top: -10px;
+  }
+  .card .desc {
+    font-size: 14.5px;
+    color: var(--text-mute);
+    margin-top: 2px;
+  }
+
+  .card .cta {
+    margin-top: auto;
+    padding-top: 8px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--text);
+  }
+  .card .cta .arrow { transition: transform 0.25s; }
+  a.card:hover .cta .arrow { transform: translateX(4px); }
+
+  .badge {
+    position: absolute;
+    top: 16px; right: 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 10.5px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 4px 9px;
+    border-radius: 999px;
+    border: 1px solid var(--line-hi);
+    color: var(--text-mute);
+    background: rgba(10, 16, 41, 0.6);
+  }
+  .badge.live { color: #8affc1; border-color: rgba(90,255,180,0.35); }
+  .badge.live .d {
+    display:inline-block; width:6px; height:6px; border-radius:50%;
+    background:#4dffab; margin-right:6px; vertical-align: middle;
+    box-shadow: 0 0 8px 1px rgba(77,255,171,0.9);
+  }
+
+  /* placeholder cards are non-links */
+  .card.soon { cursor: default; }
+  .card.soon .handle { color: var(--text-mute); }
+
+  /* ---------- footer note ---------- */
+  .note {
+    margin-top: 34px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 22px;
+    border-radius: 16px;
+    border: 1px dashed var(--line-hi);
+    background: rgba(18, 25, 54, 0.4);
+    color: var(--text-dim);
+    font-size: 14.5px;
+  }
+  .note .k {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--violet-soft);
+  }
+
+  footer.foot {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 70px 24px 60px;
+    color: var(--text-mute);
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 12.5px;
+    letter-spacing: 0.06em;
+  }
+  footer.foot .big {
+    font-family: "Sora", sans-serif;
+    font-weight: 700;
+    font-size: clamp(20px, 4vw, 30px);
+    letter-spacing: -0.01em;
+    color: var(--text);
+    margin: 0 auto 10px;
+    max-width: 22ch;
+    line-height: 1.15;
+  }
+
+  section { position: relative; z-index: 2; padding: 6px 0; }
+  .contact-section { padding-bottom: 8px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.card { transition: border-color 0.2s; }
+    a.card:hover { transform: none; }
+  }
+
+  /* ---------- phone ---------- */
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px; }
+    header.hero { padding: 64px 0 44px; }
+    h1 { font-size: clamp(42px, 15vw, 60px); }
+    .lede { font-size: 16px; }
+    .subline { gap: 8px 16px; font-size: 12px; }
+    .section-head { gap: 12px; }
+    .section-head .tag { display: none; }
+    .card { min-height: 150px; padding: 28px 20px; gap: 14px; }
+    .icon { width: 52px; height: 52px; }
+    .cards { gap: 14px; }
+    footer.foot { padding: 54px 20px 48px; }
+  }
+</style>
+
+<canvas id="net" aria-hidden="true"></canvas>
+<div class="glow a" aria-hidden="true"></div>
+<div class="glow b" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="hero">
+  <div class="wrap">
+    <span class="eyebrow"><span class="dot"></span>MAHIDOL UNIVERSITY &middot; ICT</span>
+    <h1>MUICT <span class="ai">AI</span> Club</h1>
+    <!-- <p class="lede">Workshops, hackathons, and a community building the future of artificial intelligence. Find us, follow us, and join in.</p>
+    <div class="subline">
+      <span>NLP &amp; LLMs</span>
+      <span>Deep Learning</span>
+      <span>Computer Vision</span>
+      <span>Hackathons</span>
+    </div> -->
+  </div>
+</header>
+
+<section class="contact-section">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Get in touch</h2>
+      <span class="rule"></span>
+      <span class="tag">03 channels</span>
+    </div>
+
+    <div class="cards">
+
+      <!-- Discord (live) -->
+      <a class="card" href="https://discord.gg/e6R829PZ" target="_blank" rel="noopener noreferrer"
+         style="--card-accent: var(--discord); --icon-bg: rgba(88,101,242,0.16);">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="#8b9bff" aria-hidden="true"><path d="M20.317 4.369A19.79 19.79 0 0 0 15.885 3c-.2.36-.43.845-.59 1.23a18.27 18.27 0 0 0-5.6 0A12.6 12.6 0 0 0 9.1 3a19.74 19.74 0 0 0-4.432 1.37C1.86 8.59 1.1 12.7 1.48 16.75a19.9 19.9 0 0 0 6.06 3.08c.49-.67.93-1.39 1.3-2.14-.71-.27-1.4-.6-2.04-.99.17-.13.34-.26.5-.4a14.2 14.2 0 0 0 12.4 0c.17.14.33.27.5.4-.65.39-1.34.72-2.05.99.37.75.81 1.47 1.3 2.14a19.87 19.87 0 0 0 6.06-3.08c.45-4.7-.77-8.77-3.19-12.38ZM8.52 14.33c-1.18 0-2.15-1.09-2.15-2.42 0-1.34.95-2.43 2.15-2.43 1.2 0 2.17 1.1 2.15 2.43 0 1.33-.95 2.42-2.15 2.42Zm6.96 0c-1.18 0-2.15-1.09-2.15-2.42 0-1.34.95-2.43 2.15-2.43 1.2 0 2.17 1.1 2.15 2.43 0 1.33-.95 2.42-2.15 2.42Z"/></svg>
+        </div>
+        <div class="platform">Discord</div>
+        <div class="handle">MUICT AI Club</div>
+      </a>
+
+      <!-- Instagram (live) -->
+      <a class="card" href="https://www.instagram.com/muict_ai_club/" target="_blank" rel="noopener noreferrer"
+         style="--card-accent: var(--insta-b); --icon-bg: linear-gradient(135deg, var(--insta-a), var(--insta-b), var(--insta-c));">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/>
+            <circle cx="12" cy="12" r="4.2"/>
+            <circle cx="17.4" cy="6.6" r="1.1" fill="#fff" stroke="none"/>
+          </svg>
+        </div>
+        <div class="platform">Instagram</div>
+        <div class="handle">@MUICT_AI_CLUB</div>
+      </a>
+
+      <!-- Website (placeholder) -->
+      <div class="card soon" style="--card-accent: var(--blue); --icon-bg: rgba(76,125,255,0.16);">
+        <span class="badge">Coming soon</span>
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#8ab0ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="9.2"/>
+            <path d="M3 12h18M12 3c2.6 2.5 4 5.7 4 9s-1.4 6.5-4 9c-2.6-2.5-4-5.7-4-9s1.4-6.5 4-9Z"/>
+          </svg>
+        </div>
+        <div class="platform">Website</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer class="foot">
+  <div class="wrap">
+    <div>MUICT AI CLUB &middot; MAHIDOL UNIVERSITY FACULTY OF ICT &middot; 2026</div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var canvas = document.getElementById('net');
+  var ctx = canvas.getContext('2d');
+  var w, h, dpr, nodes = [];
+
+  function rand(a, b) { return a + Math.random() * (b - a); }
+
+  function resize() {
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    w = canvas.clientWidth; h = canvas.clientHeight;
+    canvas.width = w * dpr; canvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    build();
+  }
+
+  function build() {
+    var count = Math.max(26, Math.min(70, Math.floor((w * h) / 26000)));
+    nodes = [];
+    for (var i = 0; i < count; i++) {
+      nodes.push({
+        x: rand(0, w), y: rand(0, h),
+        vx: rand(-0.18, 0.18), vy: rand(-0.18, 0.18),
+        r: rand(1.1, 2.4)
+      });
+    }
+  }
+
+  function step() {
+    ctx.clearRect(0, 0, w, h);
+    var maxD = 150;
+    for (var i = 0; i < nodes.length; i++) {
+      var n = nodes[i];
+      n.x += n.vx; n.y += n.vy;
+      if (n.x < -20) n.x = w + 20; if (n.x > w + 20) n.x = -20;
+      if (n.y < -20) n.y = h + 20; if (n.y > h + 20) n.y = -20;
+    }
+    for (var a = 0; a < nodes.length; a++) {
+      for (var b = a + 1; b < nodes.length; b++) {
+        var dx = nodes[a].x - nodes[b].x, dy = nodes[a].y - nodes[b].y;
+        var d = Math.sqrt(dx * dx + dy * dy);
+        if (d < maxD) {
+          var o = (1 - d / maxD) * 0.5;
+          var grad = ctx.createLinearGradient(nodes[a].x, nodes[a].y, nodes[b].x, nodes[b].y);
+          grad.addColorStop(0, 'rgba(139,61,255,' + o + ')');
+          grad.addColorStop(1, 'rgba(76,125,255,' + o + ')');
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(nodes[a].x, nodes[a].y);
+          ctx.lineTo(nodes[b].x, nodes[b].y);
+          ctx.stroke();
+        }
+      }
+    }
+    for (var k = 0; k < nodes.length; k++) {
+      var p = nodes[k];
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(190,205,255,0.7)';
+      ctx.fill();
+    }
+    raf = requestAnimationFrame(step);
+  }
+
+  var raf;
+  window.addEventListener('resize', resize);
+  resize();
+  if (reduce) { step(); cancelAnimationFrame(raf); }  // draw one static frame
+  else step();
+})();
+</script>
